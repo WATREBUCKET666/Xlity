@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xlity</title>
+<style>
+  /* Cloudy mountain background */
+  body {
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .account {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 5s linear infinite;
+    transition: transform 0.2s;
+  }
+
+  .account:hover {
+    transform: scale(1.1);
+  }
+
+  @keyframes rainbow {
+    0% { background-position: 0%; }
+    100% { background-position: 100%; }
+  }
+
+  .section {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+  }
+</style>
+</head>
+<body>
+
+<h1>Xlity</h1>
+<p>Click an account to copy it! This version has more buttons: Roblox, Steam, Discord, Epic Games, Minecraft, and others.</p>
+
+<div class="section" id="accounts"></div>
+
+<script>
+const accounts = [
+    { name: 'Roblox', username: 'Djvicks' },
+    { name: 'Steam', username: 'Djvicks123' },
+    { name: 'Discord', username: 'Djvicks#1234' },
+    { name: 'Epic Games', username: 'DjvicksEpic' },
+    { name: 'Minecraft', username: 'DjvicksMC' },
+    // Add more accounts easily here
+];
+
+function loadAccounts() {
+    const container = document.getElementById('accounts');
+    accounts.forEach(acc => {
+        const div = document.createElement('div');
+        div.classList.add('account');
+        div.textContent = `${acc.name}: ${acc.username}`;
+        div.onclick = () => copyAccount(`${acc.name}: ${acc.username}`);
+        container.appendChild(div);
+    });
+}
+
+function copyAccount(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied: ' + text);
+    }).catch(err => {
+        alert('Failed to copy');
+        console.error(err);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadAccounts);
+</script>
+
+</body>
+</html>
